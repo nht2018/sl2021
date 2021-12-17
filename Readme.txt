@@ -1,2 +1,3 @@
 train, test, validate 三个文件数据来源于all，是all数据的随机分割，没有重叠（除非数据在all中重复）
 数据以行为单位，每一行第一个元素为0或4，前者代表消极标签，后者相反。第五个元素为句子内容，是我们模型的输入。
+all.csv来自于https://www.kaggle.com/paoloripamonti/twitter-sentiment-analysis,为了程序运行进行了微调。
