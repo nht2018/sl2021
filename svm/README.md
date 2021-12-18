@@ -12,13 +12,7 @@ sklearn
 
 ### codes instructions
 
-#### sklearn_svm.py
-
-codes for problem 6.2
-
-using sklearn.svm.SVC as classifier
-
-#### svm_with_regularization.py
+#### svm.py
 
 codes for problem 6.10
 
@@ -31,12 +25,9 @@ some differences to the standard SVM
 
 $$
 \text{maximize   }g_\lambda(\alpha) = (1-\lambda)\sum_{i=1}^{N} \alpha_i - \frac{1}{2}\sum_{i,j=1}^{N} \alpha_i\alpha_jy_iy_jK(x_i,x_j)\\
-\text{subject to  } \sum_{i=1}^{N} \alpha_iy_i=0, 0\leq \alpha_i \leq C, i=1,...,N, 
+\text{subject to  } \sum_{i=1}^{N} \alpha_iy_i=0, 0\leq \alpha_i \leq C, i=1,...,N,
 $$
 
-* penalty in the prime problem can be modified
-  $$
-  \text{minimize  }L(w;C, p) = \frac{1}{2}||w||_2^2+\frac{C}{p}\sum_{i=1}^N \xi_i^p\\
-  \text{subject to  } y_i(w^Tx_i+b)\geq1-\xi_i,i=1,...,N
-  $$
-  here p can be 1(standard SVM) or 2
+#### kernel.py
+
+customed kernel
