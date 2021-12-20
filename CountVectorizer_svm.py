@@ -10,10 +10,11 @@ import seaborn as sns
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-
 # Import Datasets
-df_seq = pd.read_csv('E:/sl2021Project/protein data/pdb_data_seq.csv')
-df_char = pd.read_csv('E:/sl2021Project/protein data/pdb_data_no_dups.csv')
+
+PATH = 'E:/sl2021Project/protein data'
+df_seq = pd.read_csv(PATH+'/pdb_data_seq.csv')
+df_char = pd.read_csv(PATH+'/pdb_data_no_dups.csv')
 
 print('Datasets have been loaded...')
 # 2). ----- Filter and Process Dataset ------
@@ -78,13 +79,12 @@ NB_pred = model.predict(X_test_df)
 prediction["MultinomialNB"] = accuracy_score(NB_pred, y_test)
 print(prediction['MultinomialNB'])
 
-'''
+
 clf_svc = svm.SVC(gamma=0.001, C=100)  # experiment with one-vs-one
 clf_svc.fit(X_train_df, y_train)
 NB_pred = clf_svc.predict(X_test_df)
 prediction["SVM_SVC"] = accuracy_score(y_test, NB_pred)
 print(prediction['SVM_SVC'])
-'''
 
 
 clf = svm.LinearSVC(random_state=1, C=100)  # experiment with one-vs-rest
