@@ -1,6 +1,8 @@
 # sl2021
 statistic learning 2021
+
 many of the files are useless,the useful ones include:
+
   preprocess.py
   this file preprocess the two original dataset into three set:train/validate/test.json, in each file format:{'1':{},'2':{},'3':{},````}
   which zxy wants
