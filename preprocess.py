@@ -8,6 +8,7 @@ import json
 
 PATH = 'E:\\sl2021Project\\protein data'
 label0, label1 = 'trans', 'hydro'
+labeldic = {'trans': 0, 'hydro': 1}
 
 
 ''' 将数据集随机分为train,validate,test,各占约1/3,数据格式,例如train.json可能为
@@ -34,7 +35,7 @@ def generator(path='E:\\sl2021Project\\protein data', filename='\\all.csv'):
                 lst.append(ord(s)-64)
             leng = len(lst)
             #lst = np.array(lst)
-            item = {'x': lst, 'y': type, 'len': leng, 'Id': Id}
+            item = {'x': lst, 'y': labeldic[type], 'len': leng, 'Id': Id}
             s = str(num)
             if(a == 0):
                 traindic[s] = item
@@ -59,10 +60,10 @@ def generator(path='E:\\sl2021Project\\protein data', filename='\\all.csv'):
 
 
 '''shuffle 函数:1功能:给定csv文件A路径，名称和shufflerate作为压缩系数，将文件中数据中的1/shufflerate提取,
-在原路径下形成新文件shuffle.json,并返回dic形式的值'''
+在原路径下形成新文件shuffle.json,并输出两类个数，返回dic形式的值'''
 
 
-def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shufflerate=1000):
+def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shufflerate=100):
     csv_file = open(path+filename,
                     mode='r', encoding='utf-8')
 
@@ -70,26 +71,34 @@ def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shuffl
     # 将字符串转换成1~26数字列表
     num = 0
     dic = {}
+    type0, type1 = 0, 0
     for item in reader:
         if(item):
             num = num+1
             a = random.randint(0, shufflerate-1)
-            Id, strr, type = item[0], item[1], item[2]
-            lst = []
-            for s in strr:
-                lst.append(ord(s)-64)
-            leng = len(lst)
-            #lst = np.array(lst)
-            item = {'x': lst, 'y': type, 'len': leng, 'Id': Id}
-            s = str(num)
             if(a == 1):
-                dic[s] = item
+                Id, strr, type = item[0], item[1], item[2]
+                lst = []
+                for s in strr:
+                    lst.append(ord(s)-64)
+                leng = len(lst)
+                #lst = np.array(lst)
+                item = {'x': lst, 'y': labeldic[type], 'len': leng, 'Id': Id}
+                s = str(num)
+                if(type == 'hydro'):
+                    if(random.randint(0, 3) != 1):
+                        dic[s] = item
+                        type1 = type1+1
+                else:
+                    dic[s] = item
+                    type0 = type0+1
 
     csv_file.close()
     json_str = json.dumps(dic)
     f = open(PATH+'\\shuffle.json', 'w', encoding='utf-8')
     f.write(json_str)
     f.close()
+    print('shuffle: ', type0, 'type0 and ', type1, 'type1')
     return json_str
 
 
@@ -139,6 +148,6 @@ def preprocess():
 
 
 if __name__ == '__main__':
-    preprocess()
-    generator()
+    # preprocess()
+    # generator()
     shuffledata = shuffle()
