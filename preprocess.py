@@ -8,6 +8,7 @@ import json
 
 PATH = 'E:\\sl2021Project\\protein data'
 label0, label1 = 'trans', 'hydro'
+labeldic = {'trans': 0, 'hydro': 1}
 
 
 ''' 将数据集随机分为train,validate,test,各占约1/3,数据格式,例如train.json可能为
@@ -34,7 +35,7 @@ def generator(path='E:\\sl2021Project\\protein data', filename='\\all.csv'):
                 lst.append(ord(s)-64)
             leng = len(lst)
             #lst = np.array(lst)
-            item = {'x': lst, 'y': type, 'len': leng, 'Id': Id}
+            item = {'x': lst, 'y': labeldic[type], 'len': leng, 'Id': Id}
             s = str(num)
             if(a == 0):
                 traindic[s] = item
@@ -62,7 +63,7 @@ def generator(path='E:\\sl2021Project\\protein data', filename='\\all.csv'):
 在原路径下形成新文件shuffle.json,并返回dic形式的值'''
 
 
-def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shufflerate=1000):
+def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shufflerate=100):
     csv_file = open(path+filename,
                     mode='r', encoding='utf-8')
 
@@ -80,7 +81,7 @@ def shuffle(path='E:\\sl2021Project\\protein data', filename='\\all.csv', shuffl
                 lst.append(ord(s)-64)
             leng = len(lst)
             #lst = np.array(lst)
-            item = {'x': lst, 'y': type, 'len': leng, 'Id': Id}
+            item = {'x': lst, 'y': labeldic[type], 'len': leng, 'Id': Id}
             s = str(num)
             if(a == 1):
                 dic[s] = item
