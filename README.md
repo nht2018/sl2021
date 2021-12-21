@@ -39,6 +39,10 @@ reducing these number will lead to a simpler model.
 the variable "datanum" in this block refers to the number of data to be generated.  
 this can be used to debug the pipeline,  
 in actual training process, there is no need to run block 8. (run block 7, and directly jump to block 9)  
+
+
+** load data in block 9,  
+you shall replace the filename of the json file to any of other file that conforms to the format of shuffle.py  
   
 
 ** notice that in block 6 -> kernel_np(self, x1, x2),    
