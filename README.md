@@ -1,6 +1,15 @@
 # sl2021
 statistic learning 2021
 
+about the dataset
+
+DataSet:
+from https://www.kaggle.com/shahir/protein-data-set
+
+original dataset:2 files, with nearly the same structureId,each has about 14w lines
+after selected sequence with type 'trans'or'hydro':3.5w lines
+
+
 many of the files are useless,the useful ones include:
 
   preprocess.py
